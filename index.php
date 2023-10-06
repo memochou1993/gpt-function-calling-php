@@ -11,6 +11,7 @@ function ask(string $question): array {
     $client = OpenAI::client($_ENV['OPENAI_API_KEY']);
     $response = $client->chat()->create([
         'model' => 'gpt-3.5-turbo-0613',
+        'temperature' => 1,
         'messages' => [
             [
                 'role' => 'user',
@@ -34,10 +35,9 @@ function ask(string $question): array {
                 ]),
             ],
         ],
-        'temperature' => 1,
         'functions' => [
             [
-                'name' => 'get_wether',
+                'name' => 'get_current_weather',
                 'description' => 'Get the current weather in a given location.',
                 'parameters' => [
                     'type' => 'object',
@@ -58,6 +58,6 @@ function ask(string $question): array {
             ],
         ],
     ]);
-    
+
     return $response['choices'][0]['message'];
 }
