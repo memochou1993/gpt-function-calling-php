@@ -22,7 +22,9 @@ function ask(string $question): array {
                 'content' => null,
                 'function_call' => [
                     'name' => 'get_current_weather',
-                    'arguments' => 'Taipei',
+                    'arguments' => json_encode([
+                        'location' => 'Taipei',
+                    ]),
                 ],
             ],
             [
